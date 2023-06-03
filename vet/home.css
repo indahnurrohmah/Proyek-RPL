@@ -1,0 +1,35 @@
+#top-wrapper {
+    padding: 130px 0 130px 0;
+    background-position: center;
+    background-size: cover;
+    color: white;
+    text-align: center;
+    animation-name: top-anm;
+    animation-duration: 25s;
+    animation-iteration-count: infinite;
+}
+
+#top-wrapper h1 {
+    opacity: 1.0;
+    font-size: 45px;
+    letter-spacing: 10px;
+    font-weight: 400;
+}
+
+@keyframes top-anm{
+   0%{
+     background-image: url("Images/img1-cropped.png");
+   }
+   25%{
+     background-image: url("Images/img2-cropped.jpg");
+   }
+   50%{
+     background-image: url("Images/img3-cropped.png");
+   }
+   75%{
+     background-image: url("Images/img4-cropped.png");
+   }
+   100%{
+     background-image: url("Images/img5-cropped.png");
+   }
+}
