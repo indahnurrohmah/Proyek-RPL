@@ -7,7 +7,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Cari Hewan</title>
+	<title>Data Hewan</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 	<style>
 		.list-group-item{
@@ -20,7 +20,7 @@
 </head>
 <body>
 	<!--start of navbar area-->
-	<nav class="navbar navbar-dark" style="background-color:#063970">
+	<nav class="navbar navbar-dark fixed-top" style="background-color:#063970">
   	<div class="container-fluid">
   	  <a class="navbar-brand"><img src="Images/logo.png" style="height:30px" alt="HOSPITAL"></a>
   	  <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
@@ -51,8 +51,8 @@
 		</div>
 		<div class="offcanvas-body">
 			<div class="list-group list-group-flush">
-				<a href="home.php" class="list-group-item list-group-item-action" style="font-weight:bold;">Beranda</a>
-				<a href="lihat_data.php" class="list-group-item list-group-item-action">Lihat Data Hewan</a>
+				<a href="home.php" class="list-group-item list-group-item-action">Beranda</a>
+				<a href="lihat_data.php" class="list-group-item list-group-item-action" style="font-weight:bold;">Lihat Data Hewan</a>
 				<a href="catat_data.php" class="list-group-item list-group-item-action">Catat Data Hewan</a>
 				<?php if(!empty($_SESSION['id_dokter'])){?>
 					<a href="logout.php" class="list-group-item list-group-item-action"><?="Keluar";
@@ -62,31 +62,65 @@
 		</div>
 	</div>
 	<!--end of navbar area-->
-	<div class="d-flex align-items-center justify-content-center" style="height: 90vh;">
-	<div style="width:25%;">
-		<form method="POST" action="cari_hewan_proses.php" style="width: 100%; background-color:#063970;" class="p-4">
-			
-			<!-- Disini untuk session -->
-			<div class="row">
-            	<div class="col-9 mr-2">
-					<!--<label for="id_dokter" class="text-white">id_dokter</label>-->
-					<input class="form-control d-grid mt-2" type="text" name="id_hewan" id="id_hewan" placeholder="ID Hewan"></input>
+	<center class="my-5 pt-5">
+		<div style="width:90%; background-color:#063970;" class="py-4 px-2">
+			<form method="GET" action="data_hewan.php" style="width: 100%;" class="row">
+				<div style="color:white; text-align:left;" class="col-4">
+					<h3>DAFTAR DATA HEWAN</h3>
 				</div>
-				<div class="col-3 mt-2" style="text-align:center;">
-					<button class="btn btn-light" type="submit">Cari</button>
-			
+				<div class="col-4">
+					<input class="form-control" type="text" name="search" placeholder="Input Pencarian...">
 				</div>
-			</div>
-			<center>
-			<div class="text-white mt-2">
-			<h5>atau</h5>
-			</div>
-			<a type="button" href="inputhewan.php" class="btn btn-primary mt-2">Input Data Hewan Baru</a>
-		</center>
-		</form>
-		
-	</div>
-	</div>
+				<div class="col-3">
+					<select class="form-select" name="by">
+						<option value='0' selected>- Berdasarkan</option>
+						<option value='1'>ID Hewan</option>
+						<option value='2'>Nama Hewan</option>
+					</select>
+				</div>
+				<div class="col-1">
+					<button class="btn btn-light" type="submit" name="submit" value="1">CARI</button>
+				</div>
+			</form>
+		</div>
+		<?php
+			if(!empty($_GET['submit'])){
+				$search	= $_GET['search'];
+				$by	= $_GET['by'];
+			}
+			else $by = '0';
+			
+			if($by=='0')
+				$sqlSearch="SELECT * FROM hewan";
+			elseif($by=='1')
+				$sqlSearch="SELECT * FROM hewan WHERE id_hewan='$search'";
+			elseif($by=='2')
+				$sqlSearch="SELECT * FROM hewan WHERE nama_hewan LIKE '%$search%'";
+			
+			$query1=mysqli_query($connect,$sqlSearch);
+		?>
+		<div style="width:90%;" class="px-2 mt-5">
+			<table class="table table-bordered" style="text-align:center;">
+						<thead class="table-light">
+							<tr>
+								<td class="col-1">ID Hewan</td>
+								<td class="col-2">Nama Hewan</td>
+								<td class="col-2">Pemilik Hewan</td>
+							</tr>
+						</thead>
+						<tbody>
+							<?php while($data1=mysqli_fetch_array($query1)) { ?>
+							<tr>
+								<td> <?php echo $data1['id_hewan']; ?> </td>
+								<td> <?php echo $data1['nama_hewan']; ?> </td>
+								<td> <?php echo $data1['nama_pemilik']; ?> </td>
+							</tr>
+							<?php }
+							?>
+						</tbody>
+					</table>
+		</div>
+	</center>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
 </html>
