@@ -1,9 +1,6 @@
 <?php
 	session_start();
 	include 'koneksi.php';
-	if (empty($_SESSION['id_dokter'])) {
-		header("Location:login.php?message=cari_hewan.php");
-	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -67,8 +64,24 @@
 	<!--end of navbar area-->
 	<div class="d-flex align-items-center justify-content-center" style="height: 90vh;">
 	<div style="width:25%;">
+
 		<form method="POST" action="cari_hewan_proses.php" style="width: 100%; background-color:#063970;" class="p-4">
-			
+			<center class="text-white">
+			<?php if(isset($_SESSION['message'])){
+				if($_SESSION['message']=="belumcarihewan"){	
+					echo "Silakan input ID Hewan atau input data hewan baru terlebih dahulu.";	
+				}
+			}
+			else if(isset($_GET['message'])){
+				if($_GET['message']=="belumcarihewan"){	
+					echo "Silakan input ID Hewan atau input data hewan baru terlebih dahulu.";	
+				 }else if($_GET['message']=="failed"){
+				 	echo "Pencarian gagal, silakan coba lagi.";	
+				 }	
+			}
+			?>
+
+			 </center>
 			<!-- Disini untuk session -->
 			<div class="row">
             	<div class="col-9 mr-2">
@@ -76,7 +89,7 @@
 					<input class="form-control d-grid mt-2" type="text" name="id_hewan" id="id_hewan" placeholder="ID Hewan"></input>
 				</div>
 				<div class="col-3 mt-2" style="text-align:center;">
-					<button class="btn btn-light" type="submit">Cari</button>
+				<button class="btn btn-light" type="submit">Cari</button>
 			
 				</div>
 			</div>

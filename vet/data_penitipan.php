@@ -1,8 +1,7 @@
 <?php
 	session_start();
 	include 'koneksi.php';
-	$days = array("Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu");
-	$length = count($days);
+
 ?>
 <!DOCTYPE html>
 <html>

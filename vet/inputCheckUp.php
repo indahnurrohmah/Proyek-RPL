@@ -2,10 +2,15 @@
 	session_start();
 	include 'koneksi.php';
 
+
+	if (empty($_GET['id_hewan'])) {
+		header("Location:cari_hewan.php?message=belumcarihewan");
+	}
+
 	$today	= date("Y-m-d");
 	$now = date("H:i");
-	$id_hewan = $_GET['id_hewan'];
-	$id_dokter		= $_GET['id_dokter'];
+	$id_hewan 	= $_GET['id_hewan'];
+	$id_dokter	= $_GET['id_dokter'];
 
 	$message = $_GET['message'];
 

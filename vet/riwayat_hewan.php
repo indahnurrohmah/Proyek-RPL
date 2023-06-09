@@ -1,8 +1,16 @@
 <?php
 	session_start();
 	include 'koneksi.php';
-	$days = array("Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu");
-	$length = count($days);
+
+	date_default_timezone_set("Asia/Jakarta");
+
+	if (empty($_SESSION['id_hewan'])) {
+		header("Location:cari_hewan.php?message=belumcarihewan");
+	}
+	else if (empty($_GET['message'])) {
+		header("Location:cari_hewan.php?message=belumcarihewan");
+	}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -139,7 +147,7 @@
 					<h5 style="text-align:left">Riwayat Pemeriksaan</h5>
 				</div>
 				<div class="col-3">
-					<a type="button" href="input_pemeriksaan_proses.php?id_pemeriksaan=<?= date("Y").date("m").date("d").$id_hewan;?>&id_hewan=<?= $id_hewan?>" class="btn btn-dark btn-lg btn-merkcolor btn-sm" style="align:right">Tambah</a>
+					<a type="button" href="input_pemeriksaan_proses.php?id_pemeriksaan=<?= date("Y").date("m").date("d").date("H").date("i").date("s").$id_hewan?>&id_hewan=<?= $id_hewan?>" class="btn btn-dark btn-lg btn-merkcolor btn-sm" style="align:right">Tambah</a>
 				</div>
 			</div>
 			<table class="table table-bordered" style="text-align:center">

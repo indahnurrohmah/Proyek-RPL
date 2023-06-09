@@ -1,6 +1,10 @@
 <?php
 	session_start();
 	include 'koneksi.php';
+
+	if (empty($_GET['id_dataCheckUp'])) {
+		header("Location:cari_hewan.php?message=belumcarihewan");
+	}
 ?>
 <!DOCTYPE html>
 <html>

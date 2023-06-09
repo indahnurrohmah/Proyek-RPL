@@ -3,6 +3,10 @@
 	include 'koneksi.php';
 
 	$today		= date("Y-m-d");
+	if (empty($_GET['id_hewan'])) {
+		header("Location:cari_hewan.php?message=belumcarihewan");
+	}
+
 	$id_hewan = $_GET['id_hewan'];
 	$id_pemeriksaan = $_GET['id_pemeriksaan'];
 	$id_dokter		= $_GET['id_dokter'];

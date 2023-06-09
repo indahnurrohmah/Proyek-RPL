@@ -3,6 +3,11 @@
 	session_start();
 
     include 'koneksi.php';
+
+
+	if (empty($_GET['id_hewan'])) {
+		header("Location:cari_hewan.php?message=belumcarihewan");
+	}
     
     $id_hewan      = $_GET['id_hewan'];
     $today		= date("Y-m-d");
