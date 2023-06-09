@@ -22,7 +22,7 @@
 	<!--start of navbar area-->
 	<nav class="navbar navbar-dark" style="background-color:#063970">
   	<div class="container-fluid">
-  	  <a class="navbar-brand"><img src="Images/logo.png" style="height:30px" alt="HOSPITAL"></a>
+  	  <a class="navbar-brand"><img src="Images/logo.png" style="height:30px" alt="BAROKAH 2"></a>
   	</div>
 	</nav>
 	<!--end of navbar area-->

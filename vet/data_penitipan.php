@@ -25,7 +25,7 @@
 	<!--start of navbar area-->
 	<nav class="navbar navbar-dark" style="background-color:#063970">
   	<div class="container-fluid">
-  	  <a class="navbar-brand"><img src="Images/logo.png" style="height:30px" alt="HOSPITAL"></a>
+  	  <a class="navbar-brand"><img src="Images/logo.png" style="height:30px" alt="BAROKAH 2"></a>
   	  <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
   	  	<span class="navbar-toggler-icon"></span>
   	  </button>
