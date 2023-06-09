@@ -1,7 +1,11 @@
 <?php
 	session_start();
 	include 'koneksi.php';
-
+	
+	if (empty($_SESSION['id_dokter'])) {
+		header("Location:login.php?message=riwayat_hewan.php");
+	}
+	
 	$today		= date("Y-m-d");
 	$id_hewan = $_GET['id_hewan'];
 	$id_pemeriksaan = $_GET['id_pemeriksaan'];

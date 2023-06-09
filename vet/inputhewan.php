@@ -2,6 +2,10 @@
 	session_start();
 	include 'koneksi.php';
 
+	if (empty($_SESSION['id_dokter'])) {
+		header("Location:login.php?message=inputhewan.php");
+	}
+
 	$today		= date("Y-m-d");
 ?>
 <!DOCTYPE html>

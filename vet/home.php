@@ -70,13 +70,7 @@
 	<div class="d-flex align-items-center justify-content-center" style="height:35vh;">
 		<div class="row" style="width: 50%; text-align: center;">
 			<div class="d-grid col-6">
-					<?php if(!empty($_SESSION['id_dokter'])){?>
-					<a type="button" href=<?= "$href"?> class="btn btn-dark btn-lg btn-merkcolor"><?="Catat Data";
-					?></a>
-				<?php }else {?>
-					<a type="button" href="login.php" class="btn btn-dark btn-lg btn-merkcolor"><?="Catat Data";
-					?></a>
-				<?php }?>
+					<a type="button" href=<?= "$href"?> class="btn btn-dark btn-lg btn-merkcolor">Catat Data</a>
 			</div>
 			<div class="d-grid col-6">
 				<a type="button" href="lihat_data.php" class="btn btn-dark btn-lg btn-merkcolor">Lihat Data</a>

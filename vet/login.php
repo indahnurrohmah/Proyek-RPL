@@ -73,6 +73,7 @@
 			<input class="form-control d-grid mt-2" type="text" name="id_dokter" id="id_dokter" placeholder="ID Dokter"></input>
 			<!--<label for="password" class="text-white mt-2">Password</label>-->
 			<input class="form-control mt-2" type="password" name="password" id="password" placeholder="Password"></input>
+			<input type="hidden" name="next_page" value=<?=$_GET['message']?>></input>
 			<div class="mt-4" style="text-align:center;">
 				<button class="btn btn-light" type="submit">MASUK</button>
 			</div>
