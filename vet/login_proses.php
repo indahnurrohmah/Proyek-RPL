@@ -4,7 +4,7 @@
 
 	$id_dokter	= $_POST['id_dokter'];
 	$password	= $_POST['password'];
-	//$next_page	= $_POST['next_page'];
+	$next_page	= $_POST['next_page'];
 
 	$sql	= "SELECT * from dokter_hewan where id_dokter='$id_dokter' and password='$password'";
 	$data	= mysqli_query($connect,$sql);
@@ -14,8 +14,7 @@
 	if($cek > 0){
 		$_SESSION['id_dokter'] = $id_dokter;
 		$_SESSION['status'] = "login";
-		header("Location:home.php");
-		//harusnya pake next_page
+		header("Location:$next_page");
 	}
 	else{
 		header("Location:login.php?message=failed");

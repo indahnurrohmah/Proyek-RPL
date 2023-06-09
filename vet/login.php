@@ -1,6 +1,13 @@
 <?php
 	session_start();
 	include 'koneksi.php';
+
+	if (empty($_GET['message'])) {
+		$m = "home.php";
+	}
+	else {
+		$m = $_GET['message'];
+	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,7 +29,7 @@
 	<!--start of navbar area-->
 	<nav class="navbar navbar-dark" style="background-color:#063970">
   	<div class="container-fluid">
-  	  <a class="navbar-brand"><img src="Images/logo.png" style="height:30px" alt="HOSPITAL"></a>
+  	  <a class="navbar-brand"><img src="Images/logo.png" style="height:30px" alt="BAROKAH 2"></a>
   	  <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
   	  	<span class="navbar-toggler-icon"></span>
   	  </button>
@@ -51,7 +58,7 @@
 		</div>
 		<div class="offcanvas-body">
 			<div class="list-group list-group-flush">
-				<a href="home.php" class="list-group-item list-group-item-action" style="font-weight:bold;">Beranda</a>
+				<a href="home.php" class="list-group-item list-group-item-action">Beranda</a>
 				<a href="lihat_data.php" class="list-group-item list-group-item-action">Lihat Data Hewan</a>
 				<a href="cari_hewan.php" class="list-group-item list-group-item-action">Catat Data Hewan</a>
 				<?php if(!empty($_SESSION['id_dokter'])){?>
@@ -73,6 +80,7 @@
 			<input class="form-control d-grid mt-2" type="text" name="id_dokter" id="id_dokter" placeholder="ID Dokter"></input>
 			<!--<label for="password" class="text-white mt-2">Password</label>-->
 			<input class="form-control mt-2" type="password" name="password" id="password" placeholder="Password"></input>
+			<input type="hidden" name="next_page" value=<?=$m?>></input>
 			<div class="mt-4" style="text-align:center;">
 				<button class="btn btn-light" type="submit">MASUK</button>
 			</div>
