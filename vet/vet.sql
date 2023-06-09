@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 03, 2023 at 08:36 PM
+-- Generation Time: Jun 09, 2023 at 12:21 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -44,8 +44,15 @@ CREATE TABLE `ambul` (
   `prognosa` text NOT NULL,
   `pengobatan` varchar(20) NOT NULL,
   `pemeriksaan_ulang` varchar(20) NOT NULL,
-  `tanggal` date NOT NULL
+  `tanggal` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ambul`
+--
+
+INSERT INTO `ambul` (`id_ambul`, `id_dokter`, `id_pemeriksaan`, `sikap_berdiri`, `turgor_kulit`, `mukosa_mata`, `cermin_hidung`, `intergumen`, `alat_gerak`, `sirkulasi`, `pencernaan`, `genetal`, `diagnosa`, `prognosa`, `pengobatan`, `pemeriksaan_ulang`, `tanggal`) VALUES
+(6, 1, 202306091, '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '2023-06-09 15:41:00');
 
 -- --------------------------------------------------------
 
@@ -55,9 +62,9 @@ CREATE TABLE `ambul` (
 
 CREATE TABLE `data_checkup` (
   `id_dataCheckUp` int(11) NOT NULL,
-  `id_pemeriksaan` int(11) NOT NULL,
+  `id_pemeriksaan` int(11) DEFAULT NULL,
   `id_dokter` int(11) NOT NULL,
-  `id_penitipan` int(11) NOT NULL,
+  `id_penitipan` int(11) DEFAULT NULL,
   `perawatan` varchar(20) NOT NULL,
   `habitus` varchar(20) NOT NULL,
   `gizi` varchar(20) NOT NULL,
@@ -65,8 +72,17 @@ CREATE TABLE `data_checkup` (
   `napas` varchar(10) NOT NULL,
   `nadi` varchar(10) NOT NULL,
   `pertumbuhan_badan` varchar(20) NOT NULL,
-  `tanggal` date NOT NULL
+  `tanggal` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `data_checkup`
+--
+
+INSERT INTO `data_checkup` (`id_dataCheckUp`, `id_pemeriksaan`, `id_dokter`, `id_penitipan`, `perawatan`, `habitus`, `gizi`, `suhu`, `napas`, `nadi`, `pertumbuhan_badan`, `tanggal`) VALUES
+(9, 202306091, 1, NULL, '1', '1', '1', '1', '1', '1', '1', '2023-06-09 09:02:07'),
+(11, 202306091, 1, NULL, '1', '1', '1', '1', '1', '1', '1', '2023-06-09 14:06:00'),
+(12, 202306091, 1, NULL, '1', '1', '1', '1', '1', '1', '1', '2023-06-09 15:28:00');
 
 -- --------------------------------------------------------
 
@@ -78,6 +94,16 @@ CREATE TABLE `data_pemeriksaan` (
   `id_pemeriksaan` int(11) NOT NULL,
   `id_hewan` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `data_pemeriksaan`
+--
+
+INSERT INTO `data_pemeriksaan` (`id_pemeriksaan`, `id_hewan`) VALUES
+(202306091, 1),
+(202306095, 5),
+(202306096, 6),
+(202306097, 7);
 
 -- --------------------------------------------------------
 
@@ -91,6 +117,14 @@ CREATE TABLE `data_penitipan` (
   `tanggal_masuk` date NOT NULL,
   `tanggal_keluar` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `data_penitipan`
+--
+
+INSERT INTO `data_penitipan` (`id_penitipan`, `id_hewan`, `tanggal_masuk`, `tanggal_keluar`) VALUES
+(1, 5, '2023-06-09', '2023-06-11'),
+(2, 1, '2023-06-09', '2023-06-10');
 
 -- --------------------------------------------------------
 
@@ -129,7 +163,7 @@ CREATE TABLE `hewan` (
   `ras` varchar(20) NOT NULL,
   `warna` varchar(20) NOT NULL,
   `berat` int(11) NOT NULL,
-  `jenis_kelamin` varchar(1) NOT NULL,
+  `jenis_kelamin` varchar(6) NOT NULL,
   `tanda_khusus` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -141,7 +175,10 @@ INSERT INTO `hewan` (`id_hewan`, `nama_hewan`, `nama_pemilik`, `alamat`, `no_wa_
 (1, 'Ciko', 'Jason', 'Gotham', '08111999222', 3, 'Kucing', 'Persia', 'oren', 4, 'p', 'loreng item'),
 (2, 'Ciko', 'Jason', 'Gotham', '08111222333', 3, 'Kucing', 'Persia', 'Oren', 9, 'p', 'loreng'),
 (3, 'Ciko', 'Jason', 'Gotham', '08111222333', 3, 'Kucing', 'Persia', 'Oren', 9, 'p', 'loreng'),
-(4, 'Ciko', 'Jason', 'Gotham', '08111222333', 3, 'Kucing', 'Persia', 'Oren', 9, 'p', 'loreng');
+(4, 'Ciko', 'Jason', 'Gotham', '08111222333', 3, 'Kucing', 'Persia', 'Oren', 9, 'p', 'loreng'),
+(5, '1', '1', '1', '1', 1, '1', '1', '1', 1, '1', '1'),
+(6, '2', '2', '2', '2', 2, '2', '2', '2', 2, '2', '2'),
+(7, '3', '3', '3', '3', 3, '3', '3', '3', 3, '3', '3');
 
 --
 -- Indexes for dumped tables
@@ -198,13 +235,19 @@ ALTER TABLE `hewan`
 -- AUTO_INCREMENT for table `ambul`
 --
 ALTER TABLE `ambul`
-  MODIFY `id_ambul` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_ambul` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `data_checkup`
+--
+ALTER TABLE `data_checkup`
+  MODIFY `id_dataCheckUp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `data_penitipan`
 --
 ALTER TABLE `data_penitipan`
-  MODIFY `id_penitipan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_penitipan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `dokter_hewan`
@@ -216,7 +259,7 @@ ALTER TABLE `dokter_hewan`
 -- AUTO_INCREMENT for table `hewan`
 --
 ALTER TABLE `hewan`
-  MODIFY `id_hewan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_hewan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables

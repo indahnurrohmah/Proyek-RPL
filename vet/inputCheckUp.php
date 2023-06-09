@@ -2,7 +2,19 @@
 	session_start();
 	include 'koneksi.php';
 
-	$today		= date("Y-m-d");
+	$today	= date("Y-m-d");
+	$now = date("H:i");
+	$id_hewan = $_GET['id_hewan'];
+	$id_dokter		= $_GET['id_dokter'];
+
+	$message = $_GET['message'];
+
+	if ($message=="pemeriksaan") {
+		$id = $_GET['id_pemeriksaan'];
+	}
+	else if($message=="penitipan") {
+		$id = $_GET['id_penitipan'];
+	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -59,7 +71,7 @@
 			<div class="list-group list-group-flush">
 				<a href="home.php" class="list-group-item list-group-item-action" style="font-weight:bold;">Beranda</a>
 				<a href="lihat_data.php" class="list-group-item list-group-item-action">Lihat Data Hewan</a>
-				<a href="catat_data.php" class="list-group-item list-group-item-action">Catat Data Hewan</a>
+				<a href="cari_hewan.php" class="list-group-item list-group-item-action">Catat Data Hewan</a>
 				<?php if(!empty($_SESSION['id_dokter'])){?>
 					<a href="logout.php" class="list-group-item list-group-item-action"><?="Keluar";
 					?></a>
@@ -77,16 +89,11 @@
     </div>
     <div class="col-6">
         <div class="container-md form-container">
-        <form action="inputCheckUp_proses.php" method="POST">
-        <?php if(isset($_GET['message'])){
-        	if ($_GET['message']=="form_janji.php") {?>
-				<input type="hidden" name="next_page" value="form_janji.php"></input>
-			<?php }}
-			else {?>
-				<input type="hidden" name="next_page" value="data_hewan.php"></input>
-			<?php }
-        ?>
+        <form action="inputCheckUp_proses.php?message=<?=$message?>" method="POST">
         <div class="row">
+        	<input type="hidden" name="id_hewan" value="<?= $id_hewan;?>">
+        	<input type="hidden" name="id_data" value="<?= $id;?>">
+        	<input type="hidden" name="id_dokter" value="<?= $id_dokter;?>">
             <div class="col-6 mr-2">
                 <input type="text" name="perawatan" class="form-control mb-2" placeholder="Perawatan">
                 <input type="text" name="habitus" class="form-control mb-2" placeholder="Habitus">
@@ -99,11 +106,12 @@
             </div>
         </div> 
         <div class="row">
-        	<div class="col-9 mr-2">
+        	<div class="col-7 mr-2">
         		<input type="text" name="pertumbuhan_badan" class="form-control mb-2" placeholder="Pertumbuhan Badan">
         	</div>
-        	<div class="col-3 mr-2">
-        		<input class="form-control mb-2" type="date" name="tanggal" max="<?=$today?>">
+        	<div class="col-5 mr-2">
+        		<label><h6 class="text-white">Tanggal dan Waktu Check-Up</h6></label>
+        		<input class="form-control mb-2" type="datetime-local" name="tanggal" max="<?=$today?>">
         	</div>
         </div>    
         <button type="submit" class="btn btn-light mt-3" style="width: 100%">SIMPAN</button>           

@@ -1,21 +1,16 @@
 <?php
 	session_start();
 	include 'koneksi.php';
-
-	$today		= date("Y-m-d");
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Pendaftaran Hewan Baru</title>
+	<title>Laporan Check-Up</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+	<link rel="stylesheet" href="home.css">
 	<style>
-        .form-container{
-        background-color: #063970;
-        padding: 4%;
-        }
 		.list-group-item{
 			border-bottom: 0;
 		}
@@ -25,7 +20,7 @@
 	</style>
 </head>
 <body>
-  <!--start of navbar area-->
+	<!--start of navbar area-->
 	<nav class="navbar navbar-dark" style="background-color:#063970">
   	<div class="container-fluid">
   	  <a class="navbar-brand"><img src="Images/logo.png" style="height:30px" alt="HOSPITAL"></a>
@@ -49,7 +44,7 @@
 						$spesialisasi = $data['spesialisasi'];
 						
 						//echo nama, spesialisasi dokter
-						echo $data['nama'] . ", " . $spesialisasi;
+						echo $data['nama'] . ", " . $data['spesialisasi'];
 					}
 				?>
 			</h5>
@@ -68,48 +63,77 @@
 		</div>
 	</div>
 	<!--end of navbar area-->
-    
-    <center>
-        <h2 style="margin-top:2.5%;">Formulir Data Hewan Baru</h2>
-    </center>
-    <div class="row" style="width:100vw">
-    <div class="col-3">
-    </div>
-    <div class="col-6">
-        <div class="container-md form-container">
-        <form action="inputhewan_proses.php" method="POST">
-        <?php if(isset($_GET['message'])){
-        	if ($_GET['message']=="form_janji.php") {?>
-				<input type="hidden" name="next_page" value="form_janji.php"></input>
-			<?php }}
-			else {?>
-				<input type="hidden" name="next_page" value="data_hewan.php"></input>
-			<?php }
-        ?>
-        <div class="row">
-            <div class="col-6 mr-2">
-                <input type="text" name="nama" class="form-control mb-2" placeholder="Nama Hewan">
-                <input type="text" name="spesies" class="form-control mb-2" placeholder="Spesies">
-                <input type="text" name="nama_pemilik" class="form-control mb-2" placeholder="Nama Pemilik">
-                <input type="text" name="no_wa_pemilik" class="form-control mb-2" placeholder="No WA Pemilik">
-                <textarea class="form-control mb-2" name="alamat" rows="2" placeholder="Alamat Pemilik"></textarea>
-            </div>
-            <div class="col-6 ml-2">
-                <input type="text" name="umur" class="form-control mb-2" placeholder="Umur">
-                <input type="text" name="berat" class="form-control mb-2" placeholder="Berat">
-                <input type="text" name="ras" class="form-control mb-2" placeholder="Ras">
-                <input type="text" name="warna" class="form-control mb-2" placeholder="Warna">
-                <input type="text" name="jenis_kelamin" class="form-control mb-2" placeholder="Jenis Kelamin">
-                <input type="text" name="tanda_khusus" class="form-control mb-2" placeholder="Tanda Khusus">
-            </div>
-        </div>     
-        <button type="submit" class="btn btn-light mt-5" style="width: 100%">SIMPAN</button>           
-        </form>    
-        </div>
-    </div>
-    <div class="col-3">
-    </div>
-    </div>
+
+	<?php
+	
+		
+		$id_dataCheckUp	= $_GET['id_dataCheckUp'];
+		$query = mysqli_query($connect, "SELECT a.*, b.*, c.*, d.* FROM data_checkup as a INNER JOIN dokter_hewan as b ON a.id_dokter=b.id_dokter INNER JOIN data_pemeriksaan as c ON a.id_pemeriksaan=c.id_pemeriksaan INNER JOIN hewan as d ON c.id_hewan=d.id_hewan WHERE a.id_dataCheckUp='$id_dataCheckUp' ");
+	
+	while ($data = mysqli_fetch_array($query)) {
+	?>
+	<center class="my-1 pt-1">
+	<h2> Laporan Check-Up</h2>
+	<div style="width:80%; background-color:#063970;" class="py-4 px-2">
+		<div class="row">
+			<div class="col-2 mr-0">
+			<div style="color:white; text-align:left;" class="mb-3 mx-3">
+				<h6>ID Hewan</h6>
+				<h6>Nama Hewan</h6>
+				<h6>Nama Pemilik</h6>
+				<h6>ID Dokter</h6>
+				<h6>Nama Dokter</h6><br>
+			</div>
+			</div>
+			<div class="col-10 mr-5">
+			<div style="color:white; text-align:left;">
+				<h6><?= ": ".$data['id_hewan'];?></h6>
+				<h6><?= ": ".$data['nama_hewan'];?></h6>
+				<h6><?= ": ".$data['nama_pemilik'];?></h6>
+				<h6><?= ": ".$data['id_dokter'];?></h6>
+				<h6><?= ": ".$data['nama'];?></h6><br>
+			</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-2">
+			<div style="color:white; text-align:left;" class="mb-3 mx-3">
+				<h6>Perawatan</h6>
+				<h6>Habitus</h6>
+				<h6>Gizi</h6>
+				<h6>Pertumbuhan Badan</h6>
+			</div>
+			</div>
+			<div class="col-6 ml-3">
+			<div style="color:white; text-align:left;">
+				<h6><?= ": ".$data['perawatan'];?></h6>
+				<h6><?= ": ".$data['habitus'];?></h6>
+				<h6><?= ": ".$data['gizi'];?></h6>
+				<h6><?= ": ".$data['pertumbuhan_badan'];?></h6>
+			</div>
+			</div>
+			<div class="col-1">
+			<div style="color:white; text-align:left;" class="mb-3 mx-3">
+				<h6>Suhu</h6>
+				<h6>Napas</h6>
+				<h6>Nadi</h6>
+			</div>
+			</div>
+			<div class="col-3 mr-3">
+			<div style="color:white; text-align:left;">
+				<h6><?= ": ".$data['suhu'];?></h6>
+				<h6><?= ": ".$data['napas'];?></h6>
+				<h6><?= ": ".$data['nadi'];?></h6>
+			</div>
+			</div>
+		</div>
+		<div style="color:white; text-align:right;" class="mr-3">
+				<h6><?= date('d F Y',strtotime($data['tanggal'])).", ".date('H:i', strtotime($data['tanggal']));?></h6>
+		</div>
+	<?php } ?>
+	</div>
+
+	</center>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
 </html>

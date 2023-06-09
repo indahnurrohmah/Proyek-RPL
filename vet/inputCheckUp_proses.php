@@ -1,6 +1,11 @@
 <?php
 	include 'koneksi.php';
 
+	$message			= $_GET['message'];
+	$id_hewan			= $_POST['id_hewan'];
+	$id1				= $_POST['id_data'];
+	$id2				= "NULL";
+	$id_dokter			= $_POST['id_dokter'];
 	$perawatan			= $_POST['perawatan'];
 	$habitus	    	= $_POST['habitus'];
 	$gizi				= $_POST['gizi'];
@@ -9,23 +14,31 @@
     $nadi				= $_POST['nadi'];
 	$pertumbuhan_badan	= $_POST['pertumbuhan_badan'];
 	$tanggal			= $_POST['tanggal'];
+	
+	if ($message=="pemeriksaan") {
+		$sql	= "INSERT INTO data_checkup VALUES('','$id1','$id_dokter',$id2, '$perawatan', '$habitus', '$gizi', '$suhu', '$napas', '$nadi', '$pertumbuhan_badan','$tanggal')";
 
-
-	$sql	= "INSERT INTO data_checkup VALUES('','','','','$nama_hewan', '$perawatan', '$habitus', '$gizi', '$suhu', '$napas', '$nadi', '$pertumbuhan_badan','$tanggal'";
-
-	$query	= mysqli_query($connect, $sql) or die(mysqli_error($connect));
-
-	if($query) {
-		if(isset($_GET['message'])){
-        	if ($_GET['message']=="form_janji.php")
-				header("Location:terdaftar.php?message=berhasil");
-			else
-				header("Location:terdaftar.php?message=home.php");
+		$query	= mysqli_query($connect, $sql) or die(mysqli_error($connect));
+	
+		if($query) {
+			header("Location:data_pemeriksaan.php?id_pemeriksaan=$id1&id_hewan=$id_hewan");
 		}
-		else header("Location:terdaftar.php?message=home.php");
+		else {
+			header("Location:pemeriksaan.php?message=inputCheckUpGagal");
+		}
 	}
-	else {
-		echo "Input Data Gagal.";
+	else if ($message=="penitipan") {
+		$sql	= "INSERT INTO data_checkup VALUES('',$id2,'$id_dokter','$id1', '$perawatan', '$habitus', '$gizi', '$suhu', '$napas', '$nadi', '$pertumbuhan_badan','$tanggal')";
+		$query	= mysqli_query($connect, $sql) or die(mysqli_error($connect));
+	
+		if($query) {
+			header("Location:data_penitipan.php?id_penitipan=$id1&id_hewan=$id_hewan");
+		}
+		else {
+			header("Location:pemeriksaan.php?message=inputCheckUpGagal");
+		}
 	}
+
+
 	
 ?>

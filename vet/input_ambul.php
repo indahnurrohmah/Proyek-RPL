@@ -3,6 +3,9 @@
 	include 'koneksi.php';
 
 	$today		= date("Y-m-d");
+	$id_hewan = $_GET['id_hewan'];
+	$id_pemeriksaan = $_GET['id_pemeriksaan'];
+	$id_dokter		= $_GET['id_dokter'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -59,7 +62,7 @@
 			<div class="list-group list-group-flush">
 				<a href="home.php" class="list-group-item list-group-item-action" style="font-weight:bold;">Beranda</a>
 				<a href="lihat_data.php" class="list-group-item list-group-item-action">Lihat Data Hewan</a>
-				<a href="catat_data.php" class="list-group-item list-group-item-action">Catat Data Hewan</a>
+				<a href="cari_hewan.php" class="list-group-item list-group-item-action">Catat Data Hewan</a>
 				<?php if(!empty($_SESSION['id_dokter'])){?>
 					<a href="logout.php" class="list-group-item list-group-item-action"><?="Keluar";
 					?></a>
@@ -77,15 +80,10 @@
     </div>
     <div class="col-6">
         <div class="container-md form-container">
-        <form action="input_ambul_proses.php" method="POST">
-        <?php if(isset($_GET['message'])){
-        	if ($_GET['message']=="form_janji.php") {?>
-				<input type="hidden" name="next_page" value="form_janji.php"></input>
-			<?php }}
-			else {?>
-				<input type="hidden" name="next_page" value="data_hewan.php"></input>
-			<?php }
-        ?>
+        <form action="input_ambul_proses.php" method="POST">	
+        	<input type="hidden" name="id_hewan" value="<?= $id_hewan;?>">
+        	<input type="hidden" name="id_pemeriksaan" value="<?= $id_pemeriksaan;?>">
+        	<input type="hidden" name="id_dokter" value="<?= $id_dokter;?>">
         <div class="row">
             <div class="col-6 mr-2">
                 <input type="text" name="sikap_berdiri" class="form-control mb-2" placeholder="Sikap Berdiri">
@@ -99,17 +97,18 @@
                 <input type="text" name="sirkulasi" class="form-control mb-2" placeholder="Sirkulasi">
                 <input type="text" name="pencernaan" class="form-control mb-2" placeholder="Pencernaan">
                 <input type="text" name="genetal" class="form-control mb-2" placeholder="Genetal">
-                <input type="text" name="pencernaan" class="form-control mb-2" placeholder="Pencernaan">
+                <input type="text" name="diagnosa" class="form-control" placeholder="Diagnosa">
             </div>
         </div> 
-        <input type="text" name="diagnosa" class="form-control mb-2" placeholder="Diagnosa">
-        <input type="text" name="prognosa" class="form-control mb-2" placeholder="Prognosa"><input type="text" name="pengobatan" class="form-control mb-2" placeholder="Pengobatan">
+        <input type="text" name="prognosa" class="form-control mb-2" placeholder="Prognosa">
+        <input type="text" name="pengobatan" class="form-control mb-2" placeholder="Pengobatan">
         <div class="row">
         	<div class="col-8 mr-4">
         		<input type="text" name="pemeriksaan_ulang" class="form-control mb-2" placeholder="Pemeriksaan Ulang">
         	</div>
         	<div class="col-4 mr-4">
-        		<input class="form-control mb-2" type="date" name="tanggal" placeholder="Tanggal" max="<?=$today?>">
+        		<label><h6 class="text-white">Tanggal dan Waktu Ambul</h6></label>
+        		<input class="form-control mb-2" type="datetime-local" name="tanggal" max="<?=$today?>">
         	</div>
         </div>    
         <button type="submit" class="btn btn-light mt-3" style="width: 100%">SIMPAN</button>           

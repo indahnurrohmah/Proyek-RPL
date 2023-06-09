@@ -9,7 +9,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Riwayat</title>
+	<title>Data Pemeriksaan</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 	<link rel="stylesheet" href="home.css">
 	<style>
@@ -67,155 +67,114 @@
 	<!--end of navbar area-->
 
 	<?php
-	if ($_GET['message']=="cari_hewan") {
-		$id_hewan = $_SESSION['id_hewan'];
-		$query = mysqli_query($connect, "SELECT * FROM hewan WHERE id_hewan='$id_hewan'");
-	}
-	else if($_GET['message']=="inputdatapemeriksaan_berhasil" || $_GET['message']=="inputdatapenitipan_berhasil"||$_GET['message']=="hapus"){
-		$id_hewan = $_GET['id_hewan'];
-		$query = mysqli_query($connect, "SELECT * FROM hewan WHERE id_hewan='$id_hewan'");
-	}
-	else if ($_GET['message']=="inputhewan") {
-		$query = mysqli_query($connect, "SELECT * FROM hewan ORDER BY id_hewan DESC LIMIT 1");
-	}
-	while ($data = mysqli_fetch_array($query)) {
-	$id_hewan = $data['id_hewan'];
+	$id_hewan = $_GET['id_hewan'];
+	$id_pemeriksaan = $_GET['id_pemeriksaan'];
+	$query1= mysqli_query($connect, "SELECT * FROM hewan where id_hewan='$id_hewan'");
+	$query3= mysqli_query($connect, "SELECT * FROM ambul where id_pemeriksaan='$id_pemeriksaan' ORDER BY id_ambul DESC");
+	$query2= mysqli_query($connect, "SELECT * FROM data_checkup where id_pemeriksaan='$id_pemeriksaan' ORDER BY id_dataCheckUp DESC");
+	
+	
+	while ($data1 = mysqli_fetch_array($query1)) {
 	?>
 	<center class="my-1 pt-1">
-	<h2> Riwayat Data Hewan</h2>
-	<div style="width:80%; background-color:#063970;" class="py-4 px-2">
+	<h2>Data Pemeriksaan</h2>
+	<div style="width:100%; background-color:#063970;" class="py-4 px-2">
 		<div class="row">
 			<div class="col-2 mr-0">
 			<div style="color:white; text-align:left;" class="mb-3 mx-3">
 				<h6>ID Hewan</h6>
-				<h6>Nama Hewan</h6><br><br>
-				<h6>Nama Pemilik</h6>
-				<h6>No. WA Pemilik</h6>
-				<h6>Alamat Pemilik</h6>
+				<h6>Nama Hewan</h6>
 			</div>
 			</div>
-			<div class="col-4 mr-5">
+			<div class="col-6 mr-5">
 			<div style="color:white; text-align:left;">
 				<h6><?= ": ".$id_hewan;?></h6>
-				<h6><?= ": ".$data['nama_hewan'];?></h6><br><br>
-				<h6><?= ": ".$data['nama_pemilik'];?></h6>
-				<h6><?= ": ".$data['no_wa_pemilik'];?></h6>
-				<h6><?= ": ".$data['alamat'];?></h6>
+				<h6><?= ": ".$data1['nama_hewan'];?></h6>
 			</div>
 			</div>
-			<div class="col-2 ml-2 mr-0 ">
+	<?php } ?>
+			<div class="col-2">
 			<div style="color:white; text-align:left;" class="mb-3 mx-3">
-				<h6>Umur</h6>
-				<h6>Spesies</h6>
-				<h6>Ras</h6>
-				<h6>Warna</h6>
-				<h6>Berat</h6>
-				<h6>Jenis Kelamin</h6>
-				<h6>tanda Khusus</h6>
+				<h6>ID Pemeriksaan</h6>
 			</div>
 			</div>
-			<div class="col-4 mr-3">
+			<div class="col-2 mr-3">
 			<div style="color:white; text-align:left;">
-				<h6><?= ": ".$data['umur'];?></h6>
-				<h6><?= ": ".$data['spesies'];?></h6>
-				<h6><?= ": ".$data['ras'];?></h6>
-				<h6><?= ": ".$data['warna'];?></h6>
-				<h6><?= ": ".$data['berat'];?></h6>
-				<h6><?= ": ".$data['jenis_kelamin'];?></h6>
-				<h6><?= ": ".$data['tanda_khusus'];?></h6>
+				<h6><?= ": ".$id_pemeriksaan;?></h6>
 			</div>
 			</div>
 		</div>
 	</div>
-	<?php } ?>
+
+	
 	<div class="row">
 		<?php
 		$today= date("Y-m-d");
 		?>
-		<div class="col-5">
+		<div class="col-6">
 			<div style="width:90%;" class="mt-4">
 			<div class="row">
 				<div class="col-9">
-					<h5 style="text-align:left">Riwayat Pemeriksaan</h5>
+					<h5 style="text-align:left">Riwayat Check-Up</h5>
 				</div>
 				<div class="col-3">
-					<a type="button" href="input_pemeriksaan_proses.php?id_pemeriksaan=<?= date("Y").date("m").date("d").$id_hewan;?>&id_hewan=<?= $id_hewan?>" class="btn btn-dark btn-lg btn-merkcolor btn-sm" style="align:right">Tambah</a>
+					<a type="button" href="inputCheckUp.php?id_hewan=<?= $id_hewan?>&id_pemeriksaan=<?=$id_pemeriksaan;?>&id_dokter=<?=$id_dokter;?>&message=pemeriksaan" class="btn btn-dark btn-lg btn-merkcolor btn-sm" style="align:right">Tambah</a>
 				</div>
 			</div>
 			<table class="table table-bordered" style="text-align:center">
 			<thead class="table-light">
 				<tr>
-					<td class="col-1">ID Pemeriksaan</td>
-					<td class="col-1">Aksi</td>
+					<td class="col-1">ID Check Up</td>
+					<td class="col-1">Tanggal, Waktu</td>
 				</tr>
 			</thead>
 				<tbody>
 					<?php
-					 
+
+					while ($data2 = mysqli_fetch_array($query2)) {
 
 					$today= date("Y-m-d");
 					$now= date("H:i:s");
-
-					$sql= "SELECT a.*, b.* FROM hewan AS a INNER JOIN data_pemeriksaan AS b
-							ON a.id_hewan=b.id_hewan WHERE a.id_hewan='$id_hewan' ORDER BY id_pemeriksaan DESC";
-
-					$query = mysqli_query($connect, $sql);
-					while($data=mysqli_fetch_array($query)){
 						//$waktu_selesai=$data['waktu_selesai'];
 						//$tgl=$data['tgl'];
 					?>
 							<tr>
-							<td> <a href="data_pemeriksaan.php?id_pemeriksaan=<?php echo $data['id_pemeriksaan'];?>&id_hewan=<?=$id_hewan;?>"><?=$data['id_pemeriksaan'];?></a></td>
-							<td><a href="hapus_pemeriksaan.php?id_pemeriksaan=<?php echo $data['id_pemeriksaan']?>&id_hewan=<?=$id_hewan;?>;?>" class="btn btn-danger">Hapus</a></td>
+							<td><a href="output_checkup.php?id_dataCheckUp=<?=$data2['id_dataCheckUp'];?>"><?=$data2['id_dataCheckUp'];?></a></td>
+							<td><?= date('d F Y',strtotime($data2['tanggal'])).", ".date('H:i', strtotime($data2['tanggal']));?></td>
 							</tr>
-					<?php }	
-					?>
+					<?php } ?>
+					
 				</tbody>
 			</table>
 			</div>
 		</div>
-		<div class="col-7">
+		<div class="col-6">
 			<div style="width:90%;" class="mt-4">
 				<div class="row">
 				<div class="col-10">
-					<h5 style="text-align:left">Riwayat Penitipan</h5>
+					<h5 style="text-align:left">Riwayat Ambulatoir</h5>
 				</div>
 				<div class="col-2">
-					<a type="button" href="input_penitipan.php?id_hewan=<?=$id_hewan;?>" class="btn btn-dark btn-lg btn-merkcolor btn-sm" >Tambah</a>
+					<a type="button" href="input_ambul.php?id_hewan=<?=$id_hewan;?>&id_pemeriksaan=<?=$id_pemeriksaan;?>&id_dokter=<?=$id_dokter;?>" class="btn btn-dark btn-lg btn-merkcolor btn-sm" >Tambah</a>
 				</div>
 				</div>
 				<table class="table table-bordered" style="text-align:center">
 				<thead class="table-light">
 				<tr>
-					<td class="col-1">ID Penitipan</td>
-					<td class="col-1">Tanggal Masuk</td>
-					<td class="col-1">Tanggal Keluar</td>
-					<td class="col-1">Aksi</td>
+					<td class="col-1">ID Ambul</td>
+					<td class="col-1">Tanggal, Waktu</td>
 				</tr>
 				</thead>
 				<tbody>
 					<?php
-					 
-					$today= date("Y-m-d");
-					$now= date("H:i:s");
 
-					$sql= "SELECT a.*, b.* FROM hewan AS a INNER JOIN data_penitipan AS b
-						ON a.id_hewan=b.id_hewan WHERE a.id_hewan='$id_hewan' ORDER BY 
-						id_penitipan DESC";
-
-					$query = mysqli_query($connect, $sql);
-					while($data=mysqli_fetch_array($query)){
-						//$waktu_selesai=$data['waktu_selesai'];
-						//$tgl=$data['tgl'];
-					?>
+					while ($data3 = mysqli_fetch_array($query3)) { ?>
 					<tr>
-						<td> <a href="data_penitipan.php?id_penitipan=<?php echo $data['id_penitipan'];?>&id_hewan=<?=$id_hewan;?>"><?=$data['id_penitipan'];?></a></td>
-						<td> <?=date('d F Y',strtotime($data['tanggal_masuk']));?></td>
-						<td> <?=date('d F Y',strtotime($data['tanggal_keluar']));?></td>
-						<td><a href="hapus_penitipan.php?id_penitipan=<?= $data['id_penitipan'];?>&id_hewan=<?=$id_hewan;?>" class="btn btn-danger">Hapus</a></td>
+						<td><a href="output_ambul.php?id_ambul=<?=$data3['id_ambul'];?>"><?=$data3['id_ambul'];?></a></td>
+						<td><?= date('d F Y',strtotime($data3['tanggal'])).", ".date('H:i', strtotime($data3['tanggal']));?></td>
 					</tr>
-					<?php }	
-					?>
+				<?php }	
+				?>
 				</tbody>
 				</table>
 			</div>
