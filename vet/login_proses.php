@@ -17,7 +17,7 @@
 		header("Location:$next_page");
 	}
 	else{
-		header("Location:login.php?message=failed");
+		header("Location:login.php?message=$next_page&message2=failed");
 	}
 	mysqli_close($connect);
 ?>

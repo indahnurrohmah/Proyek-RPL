@@ -53,7 +53,7 @@
 			<div class="list-group list-group-flush">
 				<a href="home.php" class="list-group-item list-group-item-action">Beranda</a>
 				<a href="lihat_data.php" class="list-group-item list-group-item-action" style="font-weight:bold;">Lihat Data Hewan</a>
-				<a href="cari_hewan.php" class="list-group-item list-group-item-action">Catat Data Hewan</a>
+				<a href="riwayat_hewan.php" class="list-group-item list-group-item-action">Catat Data Hewan</a>
 				<?php if(!empty($_SESSION['id_dokter'])){?>
 					<a href="logout.php" class="list-group-item list-group-item-action"><?="Keluar";
 					?></a>
@@ -78,7 +78,6 @@
 						<option value='2'>ID Hewan</option>
 						<option value='3'>Tanggal Masuk</option>
 						<option value='4'>Tanggal Keluar</option>
-						<option value='5'>Keterangan</option>
 					</select>
 				</div>
 				<div class="col-1">
@@ -103,8 +102,6 @@
 				$sqlSearch="SELECT * FROM data_penitipan WHERE tanggal_masuk='$search'";
 			elseif($by=='4')
 				$sqlSearch="SELECT * FROM data_penitipan WHERE tanggal_keluar='$search'";
-			elseif($by=='5')
-				$sqlSearch="SELECT * FROM data_penitipan WHERE keterangan='$search'";
 			
 			$query1=mysqli_query($connect,$sqlSearch);
 		?>
@@ -117,13 +114,12 @@
 						<td class="col-2">Nama Hewan</td>
 						<td class="col-2">Tanggal Masuk</td>
 						<td class="col-2">Tanggal Keluar</td>
-						<td class="col-2">Keterangan</td>
 					</tr>
 				</thead>
 				<tbody>
 					<?php while($data1=mysqli_fetch_array($query1)) { ?>
 					<tr>
-						<td> <?php echo $data1['id_penitipan']; ?> </td>
+						<td><a href="data_penitipan.php?id_hewan=<?=$data1['id_hewan'];?>&id_penitipan=<?=$data1['id_penitipan'];?>&message=lihat"><?= $data1['id_penitipan'];?></a></td>
 						<td> <?php echo $data1['id_hewan']; ?> </td>
 						<td> 
 							<?php 
@@ -134,7 +130,6 @@
 						</td>
 						<td> <?php echo $data1['tanggal_masuk']; ?> </td>
 						<td> <?php echo $data1['tanggal_keluar']; ?> </td>
-						<td> <?php echo $data1['keterangan']; ?> </td>
 					</tr>
 					<?php }
 					?>

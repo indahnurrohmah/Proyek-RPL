@@ -53,7 +53,7 @@
 			<div class="list-group list-group-flush">
 				<a href="home.php" class="list-group-item list-group-item-action">Beranda</a>
 				<a href="lihat_data.php" class="list-group-item list-group-item-action" style="font-weight:bold;">Lihat Data Hewan</a>
-				<a href="cari_hewan.php" class="list-group-item list-group-item-action">Catat Data Hewan</a>
+				<a href="riwayat_hewan.php" class="list-group-item list-group-item-action">Catat Data Hewan</a>
 				<?php if(!empty($_SESSION['id_dokter'])){?>
 					<a href="logout.php" class="list-group-item list-group-item-action"><?="Keluar";
 					?></a>
@@ -111,7 +111,7 @@
 						<tbody>
 							<?php while($data1=mysqli_fetch_array($query1)) { ?>
 							<tr>
-								<td> <?php echo $data1['id_hewan']; ?> </td>
+								<td><a href="riwayat_hewan.php?id_hewan=<?=$data1['id_hewan'];?>&message=lihat"><?= $data1['id_hewan'];?></a></td>
 								<td> <?php echo $data1['nama_hewan']; ?> </td>
 								<td> <?php echo $data1['nama_pemilik']; ?> </td>
 							</tr>

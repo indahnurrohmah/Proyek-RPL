@@ -60,7 +60,7 @@
 			<div class="list-group list-group-flush">
 				<a href="home.php" class="list-group-item list-group-item-action">Beranda</a>
 				<a href="lihat_data.php" class="list-group-item list-group-item-action">Lihat Data Hewan</a>
-				<a href="cari_hewan.php" class="list-group-item list-group-item-action">Catat Data Hewan</a>
+				<a href="riwayat_hewan.php" class="list-group-item list-group-item-action">Catat Data Hewan</a>
 				<?php if(!empty($_SESSION['id_dokter'])){?>
 					<a href="logout.php" class="list-group-item list-group-item-action"><?="Keluar";
 					?></a>
@@ -77,6 +77,14 @@
 
 			<h4 class="text-white mb-4" style="text-align:center;">LOGIN</label>
 			<!--<label for="id_dokter" class="text-white">id_dokter</label>-->
+			<center class="text-white">
+			<?php if(isset($_GET['message2'])){
+				if($_GET['message2']=="failed"){	
+					?><h6><?= "Input ID Dokter atau password salah. Silakan coba lagi.";?></h6>
+					<?php
+				}
+			}?>
+			</center>
 			<input class="form-control d-grid mt-2" type="text" name="id_dokter" id="id_dokter" placeholder="ID Dokter"></input>
 			<!--<label for="password" class="text-white mt-2">Password</label>-->
 			<input class="form-control mt-2" type="password" name="password" id="password" placeholder="Password"></input>

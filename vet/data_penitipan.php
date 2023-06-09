@@ -55,7 +55,7 @@
 			<div class="list-group list-group-flush">
 				<a href="home.php" class="list-group-item list-group-item-action" style="font-weight:bold;">Beranda</a>
 				<a href="lihat_data.php" class="list-group-item list-group-item-action">Lihat Data Hewan</a>
-				<a href="cari_hewan.php" class="list-group-item list-group-item-action">Catat Data Hewan</a>
+				<a href="riwayat_hewan.php" class="list-group-item list-group-item-action">Catat Data Hewan</a>
 				<?php if(!empty($_SESSION['id_dokter'])){?>
 					<a href="logout.php" class="list-group-item list-group-item-action"><?="Keluar";
 					?></a>
@@ -134,7 +134,7 @@
 				<tbody>
 					<?php
 
-					while ($data2 = mysqli_fetch_array($query2)) {
+					while ($data3 = mysqli_fetch_array($query3)) {
 
 					$today= date("Y-m-d");
 					$now= date("H:i:s");
@@ -142,8 +142,8 @@
 						//$tgl=$data['tgl'];
 					?>
 							<tr>
-							<td> <?=$data2['id_dataCheckUp'];?></td>
-							<td><?= date('d F Y',strtotime($data2['tanggal'])).", ".date('H:i', strtotime($data2['tanggal']));?></td>
+							<td><a href="output_checkup.php?id_dataCheckUp=<?=$data3['id_dataCheckUp'];?>"><?=$data3['id_dataCheckUp'];?></a></td>
+							<td><?= date('d F Y',strtotime($data3['tanggal'])).", ".date('H:i', strtotime($data3['tanggal']));?></td>
 							</tr>
 					<?php } ?>
 					

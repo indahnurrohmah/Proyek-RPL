@@ -6,7 +6,7 @@
 
 	if (empty($_GET['id_hewan'])) {
 		header("Location:cari_hewan.php?message=belumcarihewan");
-
+	}
 	if (empty($_SESSION['id_dokter'])) {
 		header("Location:login.php?message=riwayat_hewan.php");
 	}
@@ -81,7 +81,7 @@
 			<div class="list-group list-group-flush">
 				<a href="home.php" class="list-group-item list-group-item-action" style="font-weight:bold;">Beranda</a>
 				<a href="lihat_data.php" class="list-group-item list-group-item-action">Lihat Data Hewan</a>
-				<a href="cari_hewan.php" class="list-group-item list-group-item-action">Catat Data Hewan</a>
+				<a href="riwayat_hewan.php" class="list-group-item list-group-item-action">Catat Data Hewan</a>
 				<?php if(!empty($_SESSION['id_dokter'])){?>
 					<a href="logout.php" class="list-group-item list-group-item-action"><?="Keluar";
 					?></a>
@@ -110,9 +110,9 @@
                 <input type="text" name="gizi" class="form-control mb-2" placeholder="Gizi">
             </div>
             <div class="col-6 ml-2">
-                <input type="text" name="suhu" class="form-control mb-2" placeholder="Suhu">
-                <input type="text" name="napas" class="form-control mb-2" placeholder="Napas">
-                <input type="text" name="nadi" class="form-control mb-2" placeholder="Nadi">
+                <input type="text" name="suhu" class="form-control mb-2" placeholder="Suhu (derajat Celsius)">
+                <input type="text" name="napas" class="form-control mb-2" placeholder="Napas per menit">
+                <input type="text" name="nadi" class="form-control mb-2" placeholder="Nadi per menit">
             </div>
         </div> 
         <div class="row">

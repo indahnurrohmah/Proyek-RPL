@@ -4,13 +4,9 @@
 
 	date_default_timezone_set("Asia/Jakarta");
 
-	if (empty($_SESSION['id_hewan'])) {
+	if (empty($_GET['message'])&&empty($_SESSION['id_hewan'])) {
 		header("Location:cari_hewan.php?message=belumcarihewan");
 	}
-	else if (empty($_GET['message'])) {
-		header("Location:cari_hewan.php?message=belumcarihewan");
-	}
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -64,7 +60,7 @@
 			<div class="list-group list-group-flush">
 				<a href="home.php" class="list-group-item list-group-item-action" style="font-weight:bold;">Beranda</a>
 				<a href="lihat_data.php" class="list-group-item list-group-item-action">Lihat Data Hewan</a>
-				<a href="cari_hewan.php" class="list-group-item list-group-item-action">Catat Data Hewan</a>
+				<a href="riwayat_hewan.php" class="list-group-item list-group-item-action">Catat Data Hewan</a>
 				<?php if(!empty($_SESSION['id_dokter'])){?>
 					<a href="logout.php" class="list-group-item list-group-item-action"><?="Keluar";
 					?></a>
@@ -75,16 +71,18 @@
 	<!--end of navbar area-->
 
 	<?php
-	if ($_GET['message']=="cari_hewan") {
+	if(isset($_GET['message'])){
+		if($_GET['message']=="inputdatapemeriksaan_berhasil" || $_GET['message']=="inputdatapenitipan_berhasil"||$_GET['message']=="hapus"||$_GET['message']=="lihat"){
+			$id_hewan = $_GET['id_hewan'];
+			$query = mysqli_query($connect, "SELECT * FROM hewan WHERE id_hewan='$id_hewan'");
+		}
+		else if ($_GET['message']=="inputhewan") {
+			$query = mysqli_query($connect, "SELECT * FROM hewan ORDER BY id_hewan DESC LIMIT 1");
+		}
+	}
+	else{
 		$id_hewan = $_SESSION['id_hewan'];
 		$query = mysqli_query($connect, "SELECT * FROM hewan WHERE id_hewan='$id_hewan'");
-	}
-	else if($_GET['message']=="inputdatapemeriksaan_berhasil" || $_GET['message']=="inputdatapenitipan_berhasil"||$_GET['message']=="hapus"){
-		$id_hewan = $_GET['id_hewan'];
-		$query = mysqli_query($connect, "SELECT * FROM hewan WHERE id_hewan='$id_hewan'");
-	}
-	else if ($_GET['message']=="inputhewan") {
-		$query = mysqli_query($connect, "SELECT * FROM hewan ORDER BY id_hewan DESC LIMIT 1");
 	}
 	while ($data = mysqli_fetch_array($query)) {
 	$id_hewan = $data['id_hewan'];

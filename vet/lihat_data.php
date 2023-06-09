@@ -1,3 +1,7 @@
+<?php
+	session_start();
+	include 'koneksi.php';
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,9 +51,9 @@
 		</div>
 		<div class="offcanvas-body">
 			<div class="list-group list-group-flush">
-				<a href="home.php" class="list-group-item list-group-item-action">Beranda</a>
-				<a href="lihat_data.php" class="list-group-item list-group-item-action" style="font-weight:bold;">Lihat Data Hewan</a>
-				<a href="cari_hewan.php" class="list-group-item list-group-item-action">Catat Data Hewan</a>
+				<a href="home.php" class="list-group-item list-group-item-action" style="font-weight:bold;">Beranda</a>
+				<a href="lihat_data.php" class="list-group-item list-group-item-action">Lihat Data Hewan</a>
+				<a href="riwayat_hewan.php" class="list-group-item list-group-item-action">Catat Data Hewan</a>
 				<?php if(!empty($_SESSION['id_dokter'])){?>
 					<a href="logout.php" class="list-group-item list-group-item-action"><?="Keluar";
 					?></a>

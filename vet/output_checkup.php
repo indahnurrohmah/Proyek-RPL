@@ -58,7 +58,7 @@
 			<div class="list-group list-group-flush">
 				<a href="home.php" class="list-group-item list-group-item-action" style="font-weight:bold;">Beranda</a>
 				<a href="lihat_data.php" class="list-group-item list-group-item-action">Lihat Data Hewan</a>
-				<a href="cari_hewan.php" class="list-group-item list-group-item-action">Catat Data Hewan</a>
+				<a href="riwayat_hewan.php" class="list-group-item list-group-item-action">Catat Data Hewan</a>
 				<?php if(!empty($_SESSION['id_dokter'])){?>
 					<a href="logout.php" class="list-group-item list-group-item-action"><?="Keluar";
 					?></a>
@@ -72,7 +72,7 @@
 	
 		
 		$id_dataCheckUp	= $_GET['id_dataCheckUp'];
-		$query = mysqli_query($connect, "SELECT a.*, b.*, c.*, d.* FROM data_checkup as a INNER JOIN dokter_hewan as b ON a.id_dokter=b.id_dokter INNER JOIN data_pemeriksaan as c ON a.id_pemeriksaan=c.id_pemeriksaan INNER JOIN hewan as d ON c.id_hewan=d.id_hewan WHERE a.id_dataCheckUp='$id_dataCheckUp' ");
+		$query = mysqli_query($connect, "SELECT a.*, b.*, c.*, d.* FROM data_checkup as a INNER JOIN dokter_hewan as b ON a.id_dokter=b.id_dokter INNER JOIN data_penitipan as c ON a.id_penitipan=c.id_penitipan INNER JOIN hewan as d ON c.id_hewan=d.id_hewan WHERE a.id_dataCheckUp='$id_dataCheckUp' ");
 	
 	while ($data = mysqli_fetch_array($query)) {
 	?>
@@ -125,9 +125,9 @@
 			</div>
 			<div class="col-3 mr-3">
 			<div style="color:white; text-align:left;">
-				<h6><?= ": ".$data['suhu'];?></h6>
-				<h6><?= ": ".$data['napas'];?></h6>
-				<h6><?= ": ".$data['nadi'];?></h6>
+				<h6><?= ": ".$data['suhu']." (dalam Celsius)";?></h6>
+				<h6><?= ": ".$data['napas']." per menit";?></h6>
+				<h6><?= ": ".$data['nadi']." per menit";?></h6>
 			</div>
 			</div>
 		</div>

@@ -12,7 +12,7 @@
 	if($cek > 0){
 		$_SESSION['id_hewan'] = $id_hewan;
 		$_SESSION['status'] = "ditemukan";
-		header("Location:riwayat_hewan.php?message=cari_hewan");
+		header("Location:riwayat_hewan.php");
 		
 	}
 	else{

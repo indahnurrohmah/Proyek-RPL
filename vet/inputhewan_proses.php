@@ -19,16 +19,9 @@
 	$query	= mysqli_query($connect, $sql) or die(mysqli_error($connect));
 
 	if($query) {
-		if(isset($_GET['message'])){
-        	if ($_GET['message']=="form_janji.php")
-				header("Location:terdaftar.php?message=berhasil");
-			else
-				header("Location:terdaftar.php?message=home.php");
-		}
-		else header("Location:riwayat_hewan.php?message=inputhewan");
-	}
+		header("Location:riwayat_hewan.php?message=inputhewan");}
 	else {
-		echo "Input Data Gagal.";
+		header("Location:inputhewan.php?message=failed");
 	}
 	
 ?>

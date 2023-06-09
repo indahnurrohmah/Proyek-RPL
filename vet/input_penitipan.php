@@ -8,7 +8,7 @@
 
 	if (empty($_GET['id_hewan'])) {
 		header("Location:cari_hewan.php?message=belumcarihewan");
-
+	}
     if (empty($_SESSION['id_dokter'])) {
 		header("Location:login.php?message=riwayat_hewan.php");
 
