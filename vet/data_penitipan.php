@@ -142,7 +142,7 @@
 						//$tgl=$data['tgl'];
 					?>
 							<tr>
-							<td><a href="output_checkup.php?id_dataCheckUp=<?=$data3['id_dataCheckUp'];?>"><?=$data3['id_dataCheckUp'];?></a></td>
+							<td><a href="output_checkup.php?id_dataCheckUp=<?=$data3['id_dataCheckUp'];?>&message=penitipan"><?=$data3['id_dataCheckUp'];?></a></td>
 							<td><?= date('d F Y',strtotime($data3['tanggal'])).", ".date('H:i', strtotime($data3['tanggal']));?></td>
 							</tr>
 					<?php } ?>

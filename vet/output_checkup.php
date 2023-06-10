@@ -72,8 +72,11 @@
 	
 		
 		$id_dataCheckUp	= $_GET['id_dataCheckUp'];
+		if($_GET['message']=="penitipan"){
 		$query = mysqli_query($connect, "SELECT a.*, b.*, c.*, d.* FROM data_checkup as a INNER JOIN dokter_hewan as b ON a.id_dokter=b.id_dokter INNER JOIN data_penitipan as c ON a.id_penitipan=c.id_penitipan INNER JOIN hewan as d ON c.id_hewan=d.id_hewan WHERE a.id_dataCheckUp='$id_dataCheckUp' ");
-	
+		}else if ($_GET['message']=="pemeriksaan"){
+			$query = mysqli_query($connect, "SELECT a.*, b.*, c.*, d.* FROM data_checkup as a INNER JOIN dokter_hewan as b ON a.id_dokter=b.id_dokter INNER JOIN data_pemeriksaan as c ON a.id_pemeriksaan=c.id_pemeriksaan INNER JOIN hewan as d ON c.id_hewan=d.id_hewan WHERE a.id_dataCheckUp='$id_dataCheckUp' ");
+		}
 	while ($data = mysqli_fetch_array($query)) {
 	?>
 	<center class="my-1 pt-1">
