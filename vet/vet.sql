@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 09, 2023 at 07:30 PM
+-- Generation Time: Jun 10, 2023 at 03:49 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -52,7 +52,8 @@ CREATE TABLE `ambul` (
 --
 
 INSERT INTO `ambul` (`id_ambul`, `id_dokter`, `id_pemeriksaan`, `sikap_berdiri`, `turgor_kulit`, `mukosa_mata`, `cermin_hidung`, `intergumen`, `alat_gerak`, `sirkulasi`, `pencernaan`, `genetal`, `diagnosa`, `prognosa`, `pengobatan`, `pemeriksaan_ulang`, `tanggal`) VALUES
-(8, 1, '2023060922305114', 'Ambruk', 'Lambat', 'Pucat', 'Basah', 'Kemerahan', 'Tidak Sakit', 'Tidak Ada', 'Normal', 'Normal', 'Infeksi Bakteri', 'Fausta', 'Antibiotik', 'Perlu', '2023-06-09 23:20:00');
+(8, 1, '2023060922305114', 'Ambruk', 'Lambat', 'Pucat', 'Basah', 'Kemerahan', 'Tidak Sakit', 'Tidak Ada', 'Normal', 'Normal', 'Infeksi Bakteri', 'Fausta', 'Antibiotik', 'Perlu', '2023-06-09 23:20:00'),
+(9, 1, '2023060922305114', 'Tegak', 'Cepat Kembali', 'Merah Muda', 'Basah', '-', 'Tidak Sakit', 'Tidak Ada', 'Normal', 'Normal', 'Infeksi Bakteri', 'Fausta', 'Antibiotik', 'Perlu', '2023-06-10 08:13:00');
 
 -- --------------------------------------------------------
 
@@ -81,7 +82,8 @@ CREATE TABLE `data_checkup` (
 
 INSERT INTO `data_checkup` (`id_dataCheckUp`, `id_pemeriksaan`, `id_dokter`, `id_penitipan`, `perawatan`, `habitus`, `gizi`, `suhu`, `napas`, `nadi`, `pertumbuhan_badan`, `tanggal`) VALUES
 (14, '2023060922305114', 1, NULL, 'Liar', 'Pendiam', 'Buruk', '39', '30', '132', 'Buruk', '2023-06-09 22:54:00'),
-(15, NULL, 1, 6, 'Liar', 'Pendiam', 'Buruk', '40', '28', '131', 'Buruk', '2023-06-09 08:45:00');
+(15, NULL, 1, 6, 'Liar', 'Pendiam', 'Buruk', '40', '28', '131', 'Buruk', '2023-06-09 08:45:00'),
+(16, '2023060922305114', 1, NULL, 'Liar', 'Pendiam', 'Buruk', '38', '20', '130', 'Sedang', '2023-06-10 08:07:00');
 
 -- --------------------------------------------------------
 
@@ -99,7 +101,12 @@ CREATE TABLE `data_pemeriksaan` (
 --
 
 INSERT INTO `data_pemeriksaan` (`id_pemeriksaan`, `id_hewan`) VALUES
-('2023060922305114', 14);
+('2023060922305114', 14),
+('2023061008322314', 14),
+('2023061008404014', 14),
+('2023061008404614', 14),
+('2023061008441316', 16),
+('2023061008462717', 17);
 
 -- --------------------------------------------------------
 
@@ -119,7 +126,9 @@ CREATE TABLE `data_penitipan` (
 --
 
 INSERT INTO `data_penitipan` (`id_penitipan`, `id_hewan`, `tanggal_masuk`, `tanggal_keluar`) VALUES
-(6, 14, '2023-06-09', '2023-06-12');
+(6, 14, '2023-06-09', '2023-06-12'),
+(9, 16, '2023-06-11', '2023-06-14'),
+(10, 17, '2023-06-11', '2023-06-15');
 
 -- --------------------------------------------------------
 
@@ -167,7 +176,9 @@ CREATE TABLE `hewan` (
 --
 
 INSERT INTO `hewan` (`id_hewan`, `nama_hewan`, `nama_pemilik`, `alamat`, `no_wa_pemilik`, `umur`, `spesies`, `ras`, `warna`, `berat`, `jenis_kelamin`, `tanda_khusus`) VALUES
-(14, 'Mulia', 'Jason', 'Jalan Damai, Sleman', '081112225768', '1 Tahun 2 Bulan', 'Kucing', 'Busok', 'Abu-abu', '1.6 kg', 'Betina', 'Ekor bengkok');
+(14, 'Mulia', 'Jason', 'Jalan Damai, Sleman', '081112225768', '1 Tahun 2 Bulan', 'Kucing', 'Busok', 'Abu-abu', '1.6 kg', 'Betina', 'Ekor bengkok'),
+(16, 'Mollie', 'Cassandra', 'Jalan Gotham', '089998881234', '2 Tahun 3 Bulan', 'Anjing', 'Bull', 'Hitam', '3.6 kg', 'Jantan', 'Loreng Putih'),
+(17, 'Muliasari', 'Tes', 'Tes', '02919320', 'tes', 'Kucing', 'tes', 'tes', 'tes', 'tes', 'tes');
 
 --
 -- Indexes for dumped tables
@@ -224,19 +235,19 @@ ALTER TABLE `hewan`
 -- AUTO_INCREMENT for table `ambul`
 --
 ALTER TABLE `ambul`
-  MODIFY `id_ambul` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_ambul` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `data_checkup`
 --
 ALTER TABLE `data_checkup`
-  MODIFY `id_dataCheckUp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_dataCheckUp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `data_penitipan`
 --
 ALTER TABLE `data_penitipan`
-  MODIFY `id_penitipan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_penitipan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `dokter_hewan`
@@ -248,7 +259,7 @@ ALTER TABLE `dokter_hewan`
 -- AUTO_INCREMENT for table `hewan`
 --
 ALTER TABLE `hewan`
-  MODIFY `id_hewan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_hewan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Constraints for dumped tables
