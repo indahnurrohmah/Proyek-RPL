@@ -54,7 +54,7 @@
 		</div>
 		<div class="offcanvas-body">
 			<div class="list-group list-group-flush">
-				<a href="home.php" class="list-group-item list-group-item-action" style="font-weight:bold;">Beranda</a>
+				<a href="home.php" class="list-group-item list-group-item-action">Beranda</a>
 				<a href="lihat_data.php" class="list-group-item list-group-item-action">Lihat Data Hewan</a>
 				<a href="riwayat_hewan.php" class="list-group-item list-group-item-action">Catat Data Hewan</a>
 				<?php if(!empty($_SESSION['id_dokter'])){?>
@@ -118,7 +118,9 @@
 					<h5 style="text-align:left">Riwayat Check-Up</h5>
 				</div>
 				<div class="col-3">
-					<a type="button" href="inputCheckUp.php?id_hewan=<?= $id_hewan?>&id_pemeriksaan=<?=$id_pemeriksaan;?>&id_dokter=<?=$id_dokter;?>&message=pemeriksaan" class="btn btn-dark btn-lg btn-merkcolor btn-sm" style="align:right">Tambah</a>
+					<?php if (!empty($_SESSION['id_dokter'])) { ?>
+						<a type="button" href="inputCheckUp.php?id_hewan=<?= $id_hewan?>&id_pemeriksaan=<?=$id_pemeriksaan;?>&id_dokter=<?=$id_dokter;?>&message=pemeriksaan" class="btn btn-dark btn-lg btn-merkcolor btn-sm" style="align:right">Tambah</a>
+					<?php } ?>
 				</div>
 			</div>
 			<table class="table table-bordered" style="text-align:center">
@@ -155,7 +157,9 @@
 					<h5 style="text-align:left">Riwayat Ambulatoir</h5>
 				</div>
 				<div class="col-2">
-					<a type="button" href="input_ambul.php?id_hewan=<?=$id_hewan;?>&id_pemeriksaan=<?=$id_pemeriksaan;?>&id_dokter=<?=$id_dokter;?>" class="btn btn-dark btn-lg btn-merkcolor btn-sm" >Tambah</a>
+					<?php if (!empty($_SESSION['id_dokter'])) { ?>
+						<a type="button" href="input_ambul.php?id_hewan=<?=$id_hewan;?>&id_pemeriksaan=<?=$id_pemeriksaan;?>&id_dokter=<?=$id_dokter;?>" class="btn btn-dark btn-lg btn-merkcolor btn-sm" >Tambah</a>
+					<?php } ?>
 				</div>
 				</div>
 				<table class="table table-bordered" style="text-align:center">

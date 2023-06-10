@@ -58,7 +58,7 @@
 		</div>
 		<div class="offcanvas-body">
 			<div class="list-group list-group-flush">
-				<a href="home.php" class="list-group-item list-group-item-action" style="font-weight:bold;">Beranda</a>
+				<a href="home.php" class="list-group-item list-group-item-action">Beranda</a>
 				<a href="lihat_data.php" class="list-group-item list-group-item-action">Lihat Data Hewan</a>
 				<a href="riwayat_hewan.php" class="list-group-item list-group-item-action">Catat Data Hewan</a>
 				<?php if(!empty($_SESSION['id_dokter'])){?>
@@ -145,14 +145,18 @@
 					<h5 style="text-align:left">Riwayat Pemeriksaan</h5>
 				</div>
 				<div class="col-3">
-					<a type="button" href="input_pemeriksaan_proses.php?id_pemeriksaan=<?= date("Y").date("m").date("d").date("H").date("i").date("s").$id_hewan?>&id_hewan=<?= $id_hewan?>" class="btn btn-dark btn-lg btn-merkcolor btn-sm" style="align:right">Tambah</a>
+					<?php if (!empty($_SESSION['id_dokter'])) { ?>
+						<a type="button" href="input_pemeriksaan_proses.php?id_pemeriksaan=<?= date("Y").date("m").date("d").date("H").date("i").date("s").$id_hewan?>&id_hewan=<?= $id_hewan?>" class="btn btn-dark btn-lg btn-merkcolor btn-sm" style="align:right">Tambah</a>
+					<?php } ?>
 				</div>
 			</div>
 			<table class="table table-bordered" style="text-align:center">
 			<thead class="table-light">
 				<tr>
 					<td class="col-1">ID Pemeriksaan</td>
-					<td class="col-1">Aksi</td>
+					<?php if (!empty($_SESSION['id_dokter'])) { ?>
+						<td class="col-1">Aksi</td>
+					<?php } ?>
 				</tr>
 			</thead>
 				<tbody>
@@ -172,7 +176,9 @@
 					?>
 							<tr>
 							<td> <a href="data_pemeriksaan.php?id_pemeriksaan=<?php echo $data['id_pemeriksaan'];?>&id_hewan=<?=$id_hewan;?>"><?=$data['id_pemeriksaan'];?></a></td>
-							<td><a href="hapus_pemeriksaan.php?id_pemeriksaan=<?php echo $data['id_pemeriksaan']?>&id_hewan=<?=$id_hewan;?>;?>" class="btn btn-danger">Hapus</a></td>
+							<?php if (!empty($_SESSION['id_dokter'])) { ?>
+								<td><a href="hapus_pemeriksaan.php?id_pemeriksaan=<?php echo $data['id_pemeriksaan']?>&id_hewan=<?=$id_hewan;?>;?>" class="btn btn-danger">Hapus</a></td>
+							<?php } ?>
 							</tr>
 					<?php }	
 					?>
@@ -187,7 +193,9 @@
 					<h5 style="text-align:left">Riwayat Penitipan</h5>
 				</div>
 				<div class="col-2">
-					<a type="button" href="input_penitipan.php?id_hewan=<?=$id_hewan;?>" class="btn btn-dark btn-lg btn-merkcolor btn-sm" >Tambah</a>
+					<?php if (!empty($_SESSION['id_dokter'])) { ?>
+						<a type="button" href="input_penitipan.php?id_hewan=<?=$id_hewan;?>" class="btn btn-dark btn-lg btn-merkcolor btn-sm" >Tambah</a>
+					<?php } ?>
 				</div>
 				</div>
 				<table class="table table-bordered" style="text-align:center">
@@ -196,7 +204,9 @@
 					<td class="col-1">ID Penitipan</td>
 					<td class="col-1">Tanggal Masuk</td>
 					<td class="col-1">Tanggal Keluar</td>
-					<td class="col-1">Aksi</td>
+					<?php if (!empty($_SESSION['id_dokter'])) { ?>
+						<td class="col-1">Aksi</td>
+					<?php } ?>
 				</tr>
 				</thead>
 				<tbody>
@@ -218,7 +228,9 @@
 						<td> <a href="data_penitipan.php?id_penitipan=<?php echo $data['id_penitipan'];?>&id_hewan=<?=$id_hewan;?>"><?=$data['id_penitipan'];?></a></td>
 						<td> <?=date('d F Y',strtotime($data['tanggal_masuk']));?></td>
 						<td> <?=date('d F Y',strtotime($data['tanggal_keluar']));?></td>
-						<td><a href="hapus_penitipan.php?id_penitipan=<?= $data['id_penitipan'];?>&id_hewan=<?=$id_hewan;?>" class="btn btn-danger">Hapus</a></td>
+						<?php if (!empty($_SESSION['id_dokter'])) { ?>
+							<td><a href="hapus_penitipan.php?id_penitipan=<?= $data['id_penitipan'];?>&id_hewan=<?=$id_hewan;?>" class="btn btn-danger">Hapus</a></td>
+						<?php } ?>
 					</tr>
 					<?php }	
 					?>
