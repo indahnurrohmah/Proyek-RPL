@@ -110,6 +110,14 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="row mt-2">
+		<div class="col-3 ">
+			<a type="button" href="riwayat_hewan.php?id_hewan=<?= $id_hewan?>&message=lihat" class="btn btn-dark btn-lg btn-merkcolor btn-sm" style="align:right">Lihat Riwayat Data Hewan Ini</a>
+		</div>
+		<div class="col-9">
+		</div>
+	</div>
 	<?php }?>
 	
 		<?php
